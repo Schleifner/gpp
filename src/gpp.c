@@ -40,9 +40,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
+#if defined _MSC_VER
+ #undef HAVE_FNMATCH_H
+ 
+#endif
+
 #if HAVE_FNMATCH_H
 #  include <fnmatch.h>
 #endif
+
+
 #include <time.h>
 
 #define STACKDEPTH 50
@@ -239,6 +247,14 @@ void construct_include_directive_marker(char **include_directive_marker,
 void escape_backslashes(const char *instr, char **outstr);
 static void DoInclude(char *file_name);
 
+#if _MSC_VER
+    #define strcasecmp _stricmp
+    #define popen _popen
+    #define pclose _pclose
+    #include <shlwapi.h>
+    #define fnmatch(pattern,string,flags) PathMatchSpec(string, pattern)
+#endif
+
 /*
  ** strdup() and my_strcasecmp() are not ANSI C, so here we define our own
  ** versions in case the compiler does not support them
@@ -268,7 +284,8 @@ int my_strcasecmp(const char *s, const char *s2) {
 }
 #else
 #  undef my_strcasecmp
-#  define my_strcasecmp strcasecmp
+
+#define my_strcasecmp strcasecmp
 #endif
 
 void bug(const char *s) {

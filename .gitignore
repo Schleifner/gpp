@@ -86,3 +86,8 @@ Makefile
 doc/gpp.1
 doc/gpp.html
 src/gpp
+/.vscode
+/build
+/gpp/.vs/gpp/v16
+/gpp/Debug
+/gpp/gpp/Debug
