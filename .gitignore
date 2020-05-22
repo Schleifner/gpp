@@ -66,7 +66,6 @@ Makefile
 /config.h.in
 /config.sub
 /configure
-/config.h
 /configure.scan
 /depcomp
 /install-sh
