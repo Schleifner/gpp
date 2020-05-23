@@ -1890,7 +1890,7 @@ int DoArithmEval(char *buf, int pos1, int pos2, int *result) {
     }
 
     if (SpliceInfix(buf, pos1, pos2, "=~", &spl1, &spl2)) {
-#if ! HAVE_FNMATCH_H
+#if ! (defined fnmatch)
         bug("globbing support has not been compiled in");
 #endif
         if (!DoArithmEval(buf, pos1, spl1, &result1)
