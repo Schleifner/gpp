@@ -24,12 +24,18 @@
 # include <config.h>
 #endif
 
+#ifdef _MSC_VER
+  #define WIN_NT
+#endif
+
 #ifdef WIN_NT              /* WIN NT settings */
 #define popen   _popen
 #define pclose  _pclose
 #define my_strdup  _strdup
 #define my_strcasecmp _stricmp
 #define SLASH '\\'
+#include <shlwapi.h>
+#define fnmatch(pattern,string,flags) PathMatchSpec(string, pattern)
 #define DEFAULT_CRLF 1
 #else                      /* UNIX settings */
 #define SLASH '/'
@@ -247,14 +253,6 @@ void construct_include_directive_marker(char **include_directive_marker,
 void escape_backslashes(const char *instr, char **outstr);
 static void DoInclude(char *file_name);
 
-#if _MSC_VER
-    #define strcasecmp _stricmp
-    #define popen _popen
-    #define pclose _pclose
-    #include <shlwapi.h>
-    #define fnmatch(pattern,string,flags) PathMatchSpec(string, pattern)
-#endif
-
 /*
  ** strdup() and my_strcasecmp() are not ANSI C, so here we define our own
  ** versions in case the compiler does not support them
@@ -267,8 +265,9 @@ inline char *my_strdup(const char *s) {
     return newstr ? (char *) memcpy(newstr, s, len) : NULL ;
 }
 #else
-#  undef my_strdup
-#  define my_strdup strdup
+  #if ! (defined my_strcasecmp)
+  #  define my_strdup strdup
+  #endif
 #endif
 #if ! HAVE_STRCASECMP
 int my_strcasecmp(const char *s, const char *s2) {
@@ -283,9 +282,10 @@ int my_strcasecmp(const char *s, const char *s2) {
     return 0;
 }
 #else
-#  undef my_strcasecmp
-
-#define my_strcasecmp strcasecmp
+  
+ #if ! (defined my_strcasecmp)
+  #define my_strcasecmp strcasecmp
+  #endif
 #endif
 
 void bug(const char *s) {
