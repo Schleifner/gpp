@@ -66,6 +66,7 @@ Makefile
 /config.h.in
 /config.sub
 /configure
+/config.h
 /configure.scan
 /depcomp
 /install-sh
@@ -85,9 +86,10 @@ Makefile
 
 doc/gpp.1
 doc/gpp.html
-src/gpp
-/.vscode
-/build
+/out/build/x64-Debug (default)
 /gpp/.vs/gpp/v16
 /gpp/Debug
 /gpp/gpp/Debug
+/build
+/.vscode
+/.vs
