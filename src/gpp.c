@@ -24,7 +24,7 @@
 # include <config.h>
 #endif
 
-#ifdef _MSC_VER
+#if defined _MSC_VER || defined _WIN32
   #define WIN_NT
 #endif
 
@@ -41,6 +41,7 @@
 #else                      /* UNIX settings */
 #define SLASH '/'
 #define DEFAULT_CRLF 0
+#define Fource_Unix_EOL 0
 #endif
 
 #include <stdio.h>
@@ -48,7 +49,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#if defined _MSC_VER
+#if defined _MSC_VER || defined _WIN32
  #undef HAVE_FNMATCH_H
  
 #endif

@@ -10,3 +10,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(sourceFiles src/gpp.c)
 
 add_executable(gpp ${sourceFiles})
+
+IF(WIN32)
+    target_link_libraries(gpp shlwapi.lib)
+ENDIF()
