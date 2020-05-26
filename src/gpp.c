@@ -37,6 +37,7 @@
 #include <shlwapi.h>
 #define fnmatch(pattern,string,flags) PathMatchSpec(string, pattern)
 #define DEFAULT_CRLF 1
+#define Fource_Unix_EOL 1
 #else                      /* UNIX settings */
 #define SLASH '/'
 #define DEFAULT_CRLF 0
@@ -811,7 +812,7 @@ void outchar(char c) {
         }
         C->out->buf[C->out->len++] = c;
     } else {
-        if (dosmode && (c == 10)) {
+        if ((!Fource_Unix_EOL) && dosmode && (c == 10)) {
             fputc(13, C->out->f);
             if (file_and_stdout)
                 fputc(13, stdout);
@@ -1467,7 +1468,7 @@ void initthings(int argc, char **argv) {
                 }
                 ishelp |= isoutput;
                 isoutput = 1;
-                C->out->f = fopen(*arg, "w");
+                C->out->f = fopen(*arg, "wb");
                 if (C->out->f == NULL )
                     bug("Cannot create output file");
                 break;
