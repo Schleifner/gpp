@@ -86,3 +86,10 @@ Makefile
 
 doc/gpp.1
 doc/gpp.html
+/out/build/x64-Debug (default)
+/gpp/.vs/gpp/v16
+/gpp/Debug
+/gpp/gpp/Debug
+/build
+/.vscode
+/.vs
