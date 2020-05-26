@@ -1,5 +1,5 @@
 Build in Windows:
-	Use the CMakeLists.txt or use the $(ProjectDir)gpp/gpp.sln in visual studio 2019, platorm Debug, x86
+	use the $(ProjectDir)gpp/gpp.sln in visual studio 2019, platorm Debug, x86
 
 Build Ubuntu:
 	Use the CMakeLists.txt
