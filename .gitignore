@@ -93,3 +93,5 @@ doc/gpp.html
 /build
 /.vscode
 /.vs
+/gpp/gpp/Release
+/gpp/Release
