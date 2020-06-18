@@ -35,7 +35,7 @@
 #define my_strcasecmp _stricmp
 #define SLASH '\\'
 #include <shlwapi.h>
-#define fnmatch(pattern,string,flags) PathMatchSpec(string, pattern)
+#define fnmatch(pattern,string,flags) PathMatchSpecA(string, pattern)
 #define DEFAULT_CRLF 1
 #define Fource_Unix_EOL 1
 #else                      /* UNIX settings */
